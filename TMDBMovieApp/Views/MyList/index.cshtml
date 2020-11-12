@@ -1,0 +1,128 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    System.Diagnostics.Debug.WriteLine("asd");
+}
+
+
+<script>
+    function getMovies(val) {
+        let numberOfItems = 6;
+
+             $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetMovies")",
+            data: { value: val, numberOfItems: numberOfItems},
+            dataType: "json",
+                 success: function (msg) {
+                     $("#search_results").html("");
+                     msg.forEach((item, index) => {
+                         let listHTML = $("#search_results").html();
+                         let elementHTML = `
+                           <div class="col">
+            <div class="interactive_image">
+                    <img src="${item.poster_path}"  class="image"/>
+                    <button class="overlay" onclick="addMovie()">
+                        <div class="text">+</div>
+                    </button>
+                    <h5 class="text-center">${item.title}</h5>
+            </div>
+
+
+        </div>
+`
+                         listHTML += elementHTML;
+                         $("#search_results").html(listHTML);
+                         console.log(index + ". " + item.title);
+                     })
+
+            },
+            error: function (req, status, error) {
+                console.log(msg);
+            }
+        });
+
+
+    }
+
+    function addMovie() {
+        alert("button clicked!" + this);
+    }
+
+</script>
+
+<style>
+    .interactive_image {
+        position: relative;
+        max-height: 510px;
+        max-width: 340px;
+    }
+
+    .image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #008CBA;
+    }
+
+        .overlay:hover {
+            opacity: 1;
+        }
+
+    .text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <input type="text" name="movieInput" value="" placeholder="Wyszukaj..." oninput="getMovies(this.value)" class="input-group-text" />
+        </div>
+    </div>
+    <br />
+    <div class="row" id="search_results">
+
+    </div>
+</div>
+
+@{
+    double x = 2.45682389;
+    for (int i = 0; i <= 1000000; i++)
+    {
+        x *= (-1.123689);
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>@i sraka @x</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    }
+}

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<TrendingResults>
+
+
+    <div class="container">
+        <div class="row">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <div class="col">
+                    <div><img src="https://image.tmdb.org/t/p/w185/@Model[i].poster_path" /></div>
+                    <h5 class="text-center">@Model[i].title</h5>
+
+                </div>
+
+            }
+        </div>
+    </div>
+
+
+
