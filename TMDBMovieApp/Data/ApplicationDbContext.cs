@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TMDBMovieApp.Models;
 
 namespace TMDBMovieApp.Data
 {
@@ -12,5 +13,7 @@ namespace TMDBMovieApp.Data
             : base(options)
         {
         }
+        public DbSet<TMDBMovieApp.Models.MoviesInLists> MoviesInLists { get; set; }
+        public DbSet<TMDBMovieApp.Models.Lists> Lists { get; set; }
     }
 }
