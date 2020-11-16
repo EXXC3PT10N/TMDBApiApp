@@ -21,7 +21,8 @@ namespace TMDBMovieApp.Controllers
         private readonly IOptions<AppSettings> _appSettings;
         private readonly string _apiPath;
         private readonly string _apiKey;
-        private readonly string _additionalPath = "/search/movie";
+        private readonly string _searchMoviePath;
+        private readonly string _hMovieDetailsPath;
         private readonly IWebHostEnvironment _env;
         private readonly ApplicationDbContext _context;
 
@@ -32,6 +33,8 @@ namespace TMDBMovieApp.Controllers
             _appSettings = appSettings;
             _apiPath = _appSettings.Value.APIPath;
             _apiKey = _appSettings.Value.APIKey;
+            _searchMoviePath = _appSettings.Value.APIEndpoints.SearchMovie;
+            _hMovieDetailsPath = _appSettings.Value.APIEndpoints.MovieDetails;
             _env = env;
             _context = context;
             //_userManager = userManager;
@@ -59,8 +62,8 @@ namespace TMDBMovieApp.Controllers
             List<Movie> movies = new List<Movie>();
             foreach (var movieID in moviesIds)
             {
-                string addPath = "/movie/" + movieID;
-                string query = BuildQuery(_apiPath, _apiKey, addPath, new string[1] { "language=pl-pl" });
+                
+                string query = BuildQuery(_apiPath, _apiKey, _hMovieDetailsPath+movieID, new string[1] { "language=pl-pl" });
                 System.Diagnostics.Debug.WriteLine("Movie ID: " + movieID);
                 System.Diagnostics.Debug.WriteLine("Movie QUERY: " + query);
                 using (var httpClient = new HttpClient())
@@ -86,7 +89,7 @@ namespace TMDBMovieApp.Controllers
 
             MovieList movieList;
             value = "query=" + value;
-            string query = BuildQuery(_apiPath, _apiKey, _additionalPath, new string[2]{"language=pl-pl", value});
+            string query = BuildQuery(_apiPath, _apiKey, _searchMoviePath, new string[2]{"language=pl-pl", value});
             System.Diagnostics.Debug.WriteLine("QUERY: " + query);
             using (var httpClient = new HttpClient())
             {

@@ -12,6 +12,7 @@ namespace TMDBMovieApp
         public string AllowedHosts { get; set; }
         public string APIPath { get; set; }
         public string APIKey { get; set; }
+        public Endpoints APIEndpoints { get; set; }
     }
     public class Logging
     {
@@ -28,5 +29,12 @@ namespace TMDBMovieApp
     public class ConnectionStrings
     {
         public string DefaultConnection { get; set; }
+    }
+
+    public class Endpoints
+    {
+        public string Trending { get; set; }
+        public string SearchMovie { get; set; }
+        public string MovieDetails { get; set; }
     }
 }

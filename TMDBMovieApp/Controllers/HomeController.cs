@@ -18,7 +18,7 @@ namespace TMDBMovieApp.Controllers
         private readonly IOptions<AppSettings> _appSettings;
         private readonly string _apiPath;
         private readonly string _apiKey;
-        private readonly string _additionalPath = "/trending/movie/day";
+        private readonly string _additionalPath;
 
         public HomeController(ILogger<HomeController> logger, IOptions<AppSettings> appSettings)
         {
@@ -26,6 +26,7 @@ namespace TMDBMovieApp.Controllers
             _appSettings = appSettings;
             _apiPath = _appSettings.Value.APIPath;
             _apiKey = _appSettings.Value.APIKey;
+            _additionalPath = _appSettings.Value.APIEndpoints.Trending;
         }
 
         public string BuildQuery(string apiPath, string apiKey, string additionalPath, params string[] additionalParameters)
