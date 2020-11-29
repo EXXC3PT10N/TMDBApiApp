@@ -53,40 +53,45 @@ namespace TMDBMovieApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
-            System.Diagnostics.Debug.WriteLine("USER ID: " + userId);
-
-            var listIds = await _context.Lists.Where(x => x.OwnerId.Equals(userId)).Select(x => x.Id).ToListAsync();
-            var moviesIds = await _context.MoviesInLists.Where(x => x.IdListNavigationId == listIds.First()).Select(x => x.IdMovie).ToListAsync();
-
-            List<Movie> movies = new List<Movie>();
-            foreach (var movieID in moviesIds)
+            try
             {
-                
-                string query = BuildQuery(_apiPath, _apiKey, _hMovieDetailsPath+movieID, new string[1] { "language=pl-pl" });
-                System.Diagnostics.Debug.WriteLine("Movie ID: " + movieID);
-                System.Diagnostics.Debug.WriteLine("Movie QUERY: " + query);
-                using (var httpClient = new HttpClient())
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+                System.Diagnostics.Debug.WriteLine("USER ID: " + userId);
+
+                var listIds = await _context.Lists.Where(x => x.OwnerId.Equals(userId)).Select(x => x.Id).ToListAsync();
+                var moviesIds = await _context.MoviesInLists.Where(x => x.IdListNavigationId == listIds.First()).Select(x => x.IdMovie).ToListAsync();
+
+                List<Movie> movies = new List<Movie>();
+                foreach (var movieID in moviesIds)
                 {
-                    using (var response = await httpClient.GetAsync(query))
+
+                    string query = BuildQuery(_apiPath, _apiKey, _hMovieDetailsPath + movieID, new string[1] { "language=pl-pl" });
+                    System.Diagnostics.Debug.WriteLine("Movie ID: " + movieID);
+                    System.Diagnostics.Debug.WriteLine("Movie QUERY: " + query);
+                    using (var httpClient = new HttpClient())
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        movies.Add(JsonConvert.DeserializeObject<Movie>(apiResponse));
+                        using (var response = await httpClient.GetAsync(query))
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            movies.Add(JsonConvert.DeserializeObject<Movie>(apiResponse));
+                        }
                     }
                 }
+                //var item = await _context.MoviesInLists.Select(x => x.Id).ToListAsync();
+                //System.Diagnostics.Debug.WriteLine("ITEM: "+item.First());
+                return View(movies);
+            } catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return View();
             }
-            //var item = await _context.MoviesInLists.Select(x => x.Id).ToListAsync();
-            //System.Diagnostics.Debug.WriteLine("ITEM: "+item.First());
-            return View(movies);
+            
 
         }
 
         [HttpPost]
         public async Task<List<Movie>> GetMovies(string value, int numberOfItems)
         {
-           
-
-
             MovieList movieList;
             value = "query=" + value;
             string query = BuildQuery(_apiPath, _apiKey, _searchMoviePath, new string[2]{"language=pl-pl", value});
@@ -110,6 +115,45 @@ namespace TMDBMovieApp.Controllers
                 listToReturn.Add(movieList.results[i]);
             }
             return listToReturn;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddMovie(int id)
+        {
+            System.Diagnostics.Debug.WriteLine("ID: " + id);
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var listIds = await _context.Lists.Where(x => x.OwnerId.Equals(userId)).Select(x => x.Id).ToListAsync();
+
+            MoviesInLists movie = new MoviesInLists();
+            movie.IdMovie = id;
+            movie.IdListNavigationId = listIds.First();
+            _context.MoviesInLists.Add(movie);
+            _context.SaveChanges();
+            return Redirect("~/MyList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            System.Diagnostics.Debug.WriteLine("ID: " + id);
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var listIds = await _context.Lists.Where(x => x.OwnerId.Equals(userId)).Select(x => x.Id).ToListAsync();
+
+            MoviesInLists movie = new MoviesInLists();
+            movie.IdMovie = id;
+            movie.IdListNavigationId = listIds.First();
+            // var entity = _context.MoviesInLists.Attach(movie);
+            var movieId = await _context.MoviesInLists.Where(c => c.IdMovie == id && c.IdListNavigationId == listIds.First()).Select(c => c.Id).ToListAsync();
+            //var finded = _context.MoviesInLists.Find(movie);
+            movie.Id = movieId.First();
+            System.Diagnostics.Debug.WriteLine("Finded ID: " + movie.Id);
+            _context.MoviesInLists.Remove(movie);
+            //entity.State = EntityState.Deleted;
+            
+            await _context.SaveChangesAsync();
+            return Redirect("~/MyList");
         }
     }
 }

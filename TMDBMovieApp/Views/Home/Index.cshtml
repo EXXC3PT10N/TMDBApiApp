@@ -4,7 +4,15 @@
 
 @model List<TrendingResults>
 
+<style>
+    img.card-img-top {
+        object-fit: cover;
+        height: 357px;
+    }
+  
 
+
+</style>
     <div class="container">
         <div class="row">
             @for (var i = 0; i < Model.Count; i++)

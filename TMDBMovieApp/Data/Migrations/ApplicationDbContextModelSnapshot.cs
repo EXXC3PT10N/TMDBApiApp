@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMDBMovieApp.Data;
 
-namespace TMDBMovieApp.Data.Migrations
+namespace TMDBMovieApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -268,7 +268,7 @@ namespace TMDBMovieApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers1");
                 });
 
             modelBuilder.Entity("TMDBMovieApp.Models.Lists", b =>
