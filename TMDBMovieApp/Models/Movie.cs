@@ -12,6 +12,8 @@ namespace TMDBMovieApp.Models
         public string overview { get; set; }
         public string release_date { get; set; }
         public List<int> genre_ids { get; set; }
+        
+        public List<Genre> genres { get; set; }
         public int id { get; set; }
         public string original_title { get; set; }
         public string original_language { get; set; }

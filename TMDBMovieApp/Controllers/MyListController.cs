@@ -22,7 +22,8 @@ namespace TMDBMovieApp.Controllers
         private readonly string _apiPath;
         private readonly string _apiKey;
         private readonly string _searchMoviePath;
-        private readonly string _hMovieDetailsPath;
+        private readonly string _MovieDetailsPath;
+        private readonly string _GetGenresPath;
         private readonly IWebHostEnvironment _env;
         private readonly ApplicationDbContext _context;
 
@@ -34,7 +35,8 @@ namespace TMDBMovieApp.Controllers
             _apiPath = _appSettings.Value.APIPath;
             _apiKey = _appSettings.Value.APIKey;
             _searchMoviePath = _appSettings.Value.APIEndpoints.SearchMovie;
-            _hMovieDetailsPath = _appSettings.Value.APIEndpoints.MovieDetails;
+            _MovieDetailsPath = _appSettings.Value.APIEndpoints.MovieDetails;
+            _GetGenresPath = _appSettings.Value.APIEndpoints.GetGenres;
             _env = env;
             _context = context;
             //_userManager = userManager;
@@ -65,7 +67,7 @@ namespace TMDBMovieApp.Controllers
                 foreach (var movieID in moviesIds)
                 {
 
-                    string query = BuildQuery(_apiPath, _apiKey, _hMovieDetailsPath + movieID, new string[1] { "language=pl-pl" });
+                    string query = BuildQuery(_apiPath, _apiKey, _MovieDetailsPath + movieID, new string[1] { "language=pl-pl" });
                     System.Diagnostics.Debug.WriteLine("Movie ID: " + movieID);
                     System.Diagnostics.Debug.WriteLine("Movie QUERY: " + query);
                     using (var httpClient = new HttpClient())
@@ -76,6 +78,8 @@ namespace TMDBMovieApp.Controllers
                             movies.Add(JsonConvert.DeserializeObject<Movie>(apiResponse));
                         }
                     }
+
+                    
                 }
                 //var item = await _context.MoviesInLists.Select(x => x.Id).ToListAsync();
                 //System.Diagnostics.Debug.WriteLine("ITEM: "+item.First());

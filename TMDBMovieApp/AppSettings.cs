@@ -36,5 +36,6 @@ namespace TMDBMovieApp
         public string Trending { get; set; }
         public string SearchMovie { get; set; }
         public string MovieDetails { get; set; }
+        public string GetGenres { get; set; }
     }
 }

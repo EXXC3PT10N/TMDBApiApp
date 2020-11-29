@@ -17,7 +17,7 @@ function getMovies(val) {
             msg.forEach((item, index) => {
                 let listHTML = $("#search_results").html();
                 let elementHTML = `
-<div class="col">
+<div class="col-lg-3 d-flex align-items-stretch" style="margin-bottom: 15px;">
             <div class="card h-100" style="width: 15rem;">
                 <img class="card-img-top"  src="${item.poster_path}" />
                 <div class="card-body">
@@ -46,4 +46,33 @@ function getMovies(val) {
 
 function addMovie() {
     alert("button clicked!" + this);
+}
+
+$(document).ready(function () {
+    //$("#myInput").on("keyup", function () {
+    //    var value = $(this).val().toLowerCase();
+    //    $("#myTable div").filter(function () {
+    //        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //    });
+    //});
+    $("#myInput").on("change paste keyup input",function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable div").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
+function changeMyInput(e) {
+    if (!e)
+        e = window.event;
+    var sender = e.srcElement || e.target;
+
+    //maybe some nested element.. find the actual table cell parent.
+    while (sender && sender.nodeName.toLowerCase() != "div")
+        sender = sender.parentNode;
+
+    var genreName = sender.innerHTML;
+    $("#myInput").attr("value",genreName);
+    //document.getElementById("myInput").value = genreName;
 }
