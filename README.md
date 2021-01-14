@@ -9,9 +9,10 @@ Aplikacja pobierająca filmy z API TMDB, umożliwia rejestrację i logowanie, or
 
 ## Uruchamianie
 
-Należy uruchomić projekt w visual studio 2019. 
-Po uruchomieniu otwieramy konsolę menedżera pakietów (narzędzia > menedżer pakietów NuGet > konsola menedżera pakietów) i wpisujemy w niej: Update-Database
-Następnie uruchamiamy stronę (skrót Ctrl+F5)
+1. Należy uruchomić projekt w visual studio 2019. 
+2. Po uruchomieniu otwieramy konsolę menedżera pakietów (narzędzia > menedżer pakietów NuGet > konsola menedżera pakietów)
+3. W konsoli wpisujemy: Update-Database
+4. Następnie uruchamiamy stronę (skrót Ctrl+F5)
 
 ## Funkcjonalności
 
