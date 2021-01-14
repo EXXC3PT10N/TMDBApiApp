@@ -24,3 +24,10 @@ Następnie uruchamiamy stronę (skrót Ctrl+F5)
 - **Moje filmy**
     Po zalogowaniu możemy wyszukiwać i dodawać filmy do listy. Ponadto istnieje również możliwość usuwania filmów z listy.
     
+## Zrzuty ekranu
+
+![Menu główne](https://github.com/EXXC3PT10N/TMDBApiApp/blob/main/Example/Screenshots/index.JPG)
+![Menu główne](https://github.com/EXXC3PT10N/TMDBApiApp/blob/main/Example/Screenshots/login.JPG)
+![Menu główne](https://github.com/EXXC3PT10N/TMDBApiApp/blob/main/Example/Screenshots/search.JPG)
+![Menu główne](https://github.com/EXXC3PT10N/TMDBApiApp/blob/main/Example/Screenshots/mylist1.JPG)
+![Menu główne](https://github.com/EXXC3PT10N/TMDBApiApp/blob/main/Example/Screenshots/mylist2.JPG)
