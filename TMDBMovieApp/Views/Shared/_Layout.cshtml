@@ -9,37 +9,55 @@
     <title>@ViewData["Title"] - TMDBMovieApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+   
 </head>
 <body>
+    <style>
+        body {
+            background-color: #121F36;
+            color: white;
+        }
+        .card {
+            background-color: #404E66;
+            color: whitesmoke;
+        }
+        #navbar {
+            background-color: #404E66;
+            color: white;
+        }
+
+        
+    </style>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 text-white" style="color: white" id="navbar">
+            <div class="container text-white" >
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TMDBMovieApp</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse text-white" >
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <ul class="navbar-nav  flex-grow-1 text-white"  >
+                        <li class="nav-item text-white" >
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index" style="color: white;">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="MyList" asp-action="Index">Moje filmy</a>
-                    </li>
-                        }
-                        </ul>
+            <li class="nav-item ">
+                <a class="nav-link  text-white" asp-area="" asp-controller="MyList" asp-action="Index">Moje filmy</a>
+            </li>
+}
+                    </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

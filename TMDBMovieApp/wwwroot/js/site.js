@@ -76,3 +76,19 @@ function changeMyInput(e) {
     $("#myInput").attr("value",genreName);
     //document.getElementById("myInput").value = genreName;
 }
+
+function displayBusyIndicator() {
+    $('.loading').show();
+}
+
+function hideBusyIndicator() {
+    $('.loading').hide();
+}
+
+$(window).on('beforeunload', function () {
+    displayBusyIndicator();
+});
+
+//$(window).on('load' ,function () {
+//    hideBusyIndicator();
+//});
