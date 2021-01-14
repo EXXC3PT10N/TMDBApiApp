@@ -15,12 +15,12 @@ Następnie uruchamiamy stronę (skrót Ctrl+F5)
 
 ## Funkcjonalności
 
-- Strona główna
+- **Strona główna**
     Przegląd aktualnie popularnych filmów
-- Register
+- **Register**
     Rejestracja nowego użytkownika
-- Login
+- **Login**
     Logowanie użytkownika
-- Moje filmy
+- **Moje filmy**
     Po zalogowaniu możemy wyszukiwać i dodawać filmy do listy. Ponadto istnieje również możliwość usuwania filmów z listy.
     
